@@ -1,0 +1,40 @@
+
+html {
+    overflow: hidden;
+    width: calc(100vw);
+    height: calc(100vh);
+    margin: 0;
+    padding: 0;
+
+    /*cursor: none; remove later for aesthetics*/
+
+    background-color: #000000;
+    background: radial-gradient(circle at calc(70vw) calc(20vh), #274741 0%, #273443 25%, #261d36 70%, #151720 100%);
+}
+
+body{
+    overflow: auto;
+    width: calc(100vw);
+    height: calc(100vh);
+    margin: 0;
+    padding: 2%;
+
+    color:white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.dot {
+    left: 0;
+    top: 0;
+
+    height: 0px;
+    width: 0px;
+    
+
+    --radius: 0;
+    --theta: 0;
+
+    background-color: #6f6c6c;
+    border-radius: 50%;
+    position: fixed;
+  }

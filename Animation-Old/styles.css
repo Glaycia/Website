@@ -1,0 +1,49 @@
+
+html {
+    overflow: hidden;
+    width: calc(100vw);
+    height: calc(100vh);
+    margin: 0;
+    padding: 0;
+
+    background: radial-gradient(circle at calc(70vw) calc(20vh), #274741 0%, #273443 35%, #1a1c28 100%);
+}
+
+body{
+    overflow: auto;
+    width: calc(100vw);
+    height: calc(100vh);
+    margin: 0;
+    padding: 2%;
+
+    color:white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.dot {
+    left: 0;
+    top: 0;
+
+    height: 0px;
+    width: 0px;
+    
+    background-color: #6f6c6c;
+    border-radius: 50%;
+    position: fixed;
+
+    transform-origin: calc(70vw) calc(20vh) -50px;
+
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: star-parallax;
+  }
+
+@keyframes star-parallax{
+    0% {
+        transform: rotate(1turn);
+    }
+    100% {
+        transform: rotate(0turn);
+    }
+}
