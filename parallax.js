@@ -51,7 +51,9 @@ function rotateAllDots(wheelDelta){
     dots.forEach(function(dot) {
         var radius = dot.style.radius;
 
-        dot.style.theta += lines * theta_per_line * Math.sqrt(radius)/radius;
+        if((text_position > 0 && lines < 0) || (text_position < texts.length && lines > 0)){
+            dot.style.theta -= lines * theta_per_line * Math.sqrt(radius)/radius;
+        }
 
         var theta = dot.style.theta;
 
@@ -60,34 +62,39 @@ function rotateAllDots(wheelDelta){
     })
 }
 
+function monotonicRescale(x){
+    return (Math.sin(2 * Math.PI * x) + 2 * Math.PI * x)/(2 * Math.PI);
+}
+function opacityRescale(x){
+    return Math.pow(1-Math.pow(Math.cos(Math.PI * x), 4), 4);
+}
+
+var text_position = 0;
 function rotateText(wheelDelta){
     lines = wheelDelta/120;
-    theta_per_line = 0.58;
 
     var texts = document.querySelectorAll('.text')
+
+    text_position += lines * 0.01;
+    text_position = clamp(text_position, 0, texts.length);
+
     texts.forEach(function(element) {
-        element.style.radius = window.innerWidth * (orbit[0] * 2.0 / 3);
-        var radius = element.style.radius;
-
-        element.style.theta += lines * theta_per_line * Math.sqrt(radius)/radius;
-
-        var theta = element.style.theta;
-
-        element.style.left = (orbit[0] * window.innerWidth + Math.cos(theta) * radius) + 'px'
-        element.style.top = (orbit[1] * window.innerHeight + Math.sin(theta) * radius) + 'px'
-
-        element.style.transform = 'rotate(' + (element.style.theta + Math.PI) + 'rad)'
-
         element.style.opacity = 0;
-        while(element.style.theta > 2 * Math.PI){
-            element.style.theta -= 2 * Math.PI;
-        }
-        while(element.style.theta < 0){
-            element.style.theta += 2 * Math.PI;
-        }
-        if(Math.abs(element.style.theta - Math.PI) < Math.PI / texts.length){
-            var remap = texts.length / Math.PI * (element.style.theta - Math.PI);
-            element.style.opacity = Math.exp(remap * remap / (remap * remap - 1))
+        console.log('textposition: ' + text_position)
+        console.log('textpositionfloor: ' + Math.floor(text_position))
+        if(element.style.queue_id == Math.floor(text_position)){
+            var radius = window.innerWidth * (orbit[0] * 2.0 / 3);
+
+            var state_percent = monotonicRescale(text_position - Math.floor(text_position));
+            var theta = 3 * Math.PI/2 - Math.PI * state_percent;
+            console.log('theta: ' + theta)
+            
+            element.style.opacity = opacityRescale(text_position - Math.floor(text_position));
+
+            element.style.left = (orbit[0] * window.innerWidth + Math.cos(theta) * radius) + 'px';
+            element.style.top = (orbit[1] * window.innerHeight + Math.sin(theta) * radius) + 'px';
+    
+            element.style.transform = 'rotate(' + (theta + Math.PI) + 'rad)';
         }
     })
 }
@@ -122,6 +129,7 @@ texts = [
     "Pellentesque convallis nunc eu eros aliquet laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris nisi purus, luctus vel arcu in, malesuada pharetra leo. Praesent in sagittis mauris. Aenean sed vestibulum elit, a finibus ante. Vivamus suscipit laoreet eros, fermentum malesuada quam ornare non. Aliquam in massa mollis, tristique ligula ac, placerat lorem. Quisque mattis eget nisl vel interdum. Nam et velit semper, tincidunt nibh vitae, convallis neque. Cras fringilla sagittis nunc in pellentesque. Nullam luctus massa at erat eleifend, malesuada mollis dolor pretium. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer consequat mauris mauris, a ultricies metus rhoncus ut. In convallis viverra lectus quis feugiat. Curabitur consequat sem in ipsum porttitor convallis.",
     "Mauris suscipit ligula nec massa faucibus facilisis. Praesent in ante et orci ultricies aliquam. Aenean nulla elit, porta in ante id, euismod semper nibh. Aenean ultrices, sapien vel facilisis auctor, massa lacus efficitur nisl, eget feugiat nunc risus nec quam. Duis ut ipsum non odio vulputate molestie. Aenean nisi magna, porttitor cursus pulvinar nec, sodales volutpat tortor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla rhoncus felis quam, a scelerisque enim ultricies id. Suspendisse eget euismod purus. Proin at velit eget diam tempus congue a placerat ipsum. Etiam at mi interdum, rhoncus odio accumsan, dignissim augue. Nullam ultrices, tortor sed sagittis sollicitudin, dolor sem auctor magna, ut mollis metus quam vel ligula."
 ];
+
 for(var i = 0; i < texts.length; i++){
     var element = document.createElement('span');
 
@@ -134,6 +142,8 @@ for(var i = 0; i < texts.length; i++){
 
     element.style.left = Math.ceil(orbit[0] * window.innerWidth + Math.cos(theta) * radius) + 'px';
     element.style.top = Math.ceil(orbit[1] * window.innerHeight + Math.sin(theta) * radius) + 'px';
+
+    element.style.queue_id = i;
 
     element.className = 'text';
     document.body.appendChild(element);

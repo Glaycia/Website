@@ -46,8 +46,7 @@ body{
     height: 100px;
     width: 100px;
 
-    --radius: 0;
-    --theta: 0;
+    --queue_id: -1;
 
     color: #ffffff;
     position: fixed;
