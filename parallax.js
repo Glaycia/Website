@@ -51,8 +51,8 @@ function rotateAllDots(wheelDelta){
     dots.forEach(function(dot) {
         var radius = dot.style.radius;
 
-        if((text_position > 0 && lines < 0) || (text_position < texts.length && lines > 0)){
-            dot.style.theta -= lines * theta_per_line * Math.sqrt(radius)/radius;
+        if((text_position > 0 && lines > 0) || (text_position < texts.length && lines < 0)){
+            dot.style.theta += lines * theta_per_line * Math.sqrt(radius)/radius;
         }
 
         var theta = dot.style.theta;
@@ -75,7 +75,7 @@ function rotateText(wheelDelta){
 
     var texts = document.querySelectorAll('.text')
 
-    text_position += lines * 0.01;
+    text_position -= lines * 0.01;
     text_position = clamp(text_position, 0, texts.length);
 
     texts.forEach(function(element) {
