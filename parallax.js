@@ -45,7 +45,7 @@ document.body.addEventListener('resize', ResizeHandler, false);
 
 function rotateAllDots(wheelDelta){
     lines = wheelDelta/120;
-    theta_per_line = 0.18;
+    theta_per_line = 0.5;
 
     var dots = document.querySelectorAll('.dot')
     dots.forEach(function(dot) {
@@ -75,7 +75,7 @@ function rotateText(wheelDelta){
 
     var texts = document.querySelectorAll('.text')
 
-    text_position -= lines * 0.01;
+    text_position -= lines * 0.03;
     text_position = clamp(text_position, 0, texts.length);
 
     texts.forEach(function(element) {
