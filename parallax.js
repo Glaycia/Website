@@ -45,7 +45,7 @@ document.body.addEventListener('resize', ResizeHandler, false);
 
 function rotateAllDots(wheelDelta){
     lines = wheelDelta/120;
-    theta_per_line = 0.5;
+    theta_per_line = 0.18;
 
     var dots = document.querySelectorAll('.dot')
     dots.forEach(function(dot) {
