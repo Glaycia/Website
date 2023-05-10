@@ -30,6 +30,7 @@ body{
     height: 0px;
     width: 0px;
     
+    --size: 0;
 
     --radius: 0;
     --theta: 0;
@@ -55,4 +56,27 @@ body{
     opacity: 0;
 
     content: "";
+  }
+  .image {
+    perspective: 1000px;
+
+    border-radius: 25px;
+    border: 3px solid #d1f8fc;
+
+    left: calc(65vw);
+    top: calc(50vh);
+
+    height: calc(17.5vw);
+    width: calc(15vw);
+
+    color: #ffffff;
+    position: fixed;
+    object-fit: cover;
+
+    transform: perspective(400px) translate(-50%, -50%);
+    transform-origin: center;
+    transform-style: preserve-3d;
+
+    --queue_id: -1;
+    opacity: 0;
   }
