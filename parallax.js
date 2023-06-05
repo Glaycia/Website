@@ -1,6 +1,8 @@
 var portrait = false;
 var orbit = [0.6, 0.2, -20]
 
+var slider = document.getElementById("progress");
+
 var num_dots = 500;
 texts = [
     "Infallible Resistance",
@@ -134,6 +136,19 @@ function clamp(x, min, max){
 
 document.body.addEventListener('mousewheel', MouseWheelHandler, false);
 document.body.addEventListener('resize', ResizeHandler, false);
+
+function updateSlider(){
+    slider.setAttribute("min", 0);
+    slider.setAttribute("max", texts.length);
+
+    slider.value = text_position;
+
+    slider.oninput = function(){
+        if(this.value > 0.5 && this.value < texts.length - 0.5){
+            text_position = Math.floor(this.value) + 0.5;
+        }
+    }
+}
 
 function rotateAllDots(wheelDelta){
     lines = wheelDelta/120.0;
@@ -303,6 +318,7 @@ function exectuteLoop(){
             scrollDirection = 0;
         }
     }
+    updateSlider();
     rotateImages();
     rotateText(scrollDirection * (travelVelocity));
     rotateAllDots(dotPassiveRotation);
