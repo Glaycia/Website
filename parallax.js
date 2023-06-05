@@ -13,7 +13,7 @@ texts = [
     "Fallible Motivation",
     "It is almost impossible to win a fight for a cause you don't believe in. The soldiers were completely disconnected from political motivations. The motivation at the time was the Domino theory, which stated that if one country were to become communist, its neighbors would also succumb in a chain reaction leaving the world plagued with communism. Citing this, Kennedy escalated the Vietnam war by deploying troops, upkeeping this false narrative. The American public did not have too many qualms with this, as the Red Scare embedded a great fear for Communism.",
     "On August 7, 1964, the Gulf of Tonkin resolution was passed, enabling the United States to militarize South Asia in the name of maintaining international peace. In reality, evidence was twisted, based on false reports, and critical pieces were unreported, leading to the passing of the resolution. To give perspective on the scale of feigned ignorance, \"almost 90 percent of the SIGINT intercepts that would have provided a conflicting account were kept out of the reports sent to the Pentagon and White House.\" [3]",
-    "The United States government had passed legislation for drafting young men, used here to get soldiers for the Vietnam War. Tim O'Brien, a Vietnam War veteran fictionalizes his apprehensions for going to war in his novel \"The Things They Carried\":  \"I was too good for this war. Too smart, too compassionate, too everything. It couldn't happen. … If they needed fresh bodies, why not draft some bac-to-the-stone-age hawk? Or some dumb jingo in his hard hat and Bomb Hanoi button, or one of LBJ's pretty daughters\" (42) [4]. Harping on the people inciting the draft, he protests being sent to a war he doesn't believe in, especially when civilians with no mortal stake in the war push the youth into fighting for the anti-communist narrative. However, he is dragged into the war anyways out of the shame in dodging the draft.",
+    "The United States government had passed legislation for drafting young men, used here to get soldiers for the Vietnam War. Tim O'Brien, a Vietnam War veteran fictionalizes his apprehensions for going to war in his novel \"The Things They Carried\":  \"I was too good for this war. Too smart, too compassionate, too everything. It couldn't happen. ... If they needed fresh bodies, why not draft some bac-to-the-stone-age hawk? Or some dumb jingo in his hard hat and Bomb Hanoi button, or one of LBJ's pretty daughters\" (42) [4]. Harping on the people inciting the draft, he protests being sent to a war he doesn't believe in, especially when civilians with no mortal stake in the war push the youth into fighting for the anti-communist narrative. However, he is dragged into the war anyways out of the shame in dodging the draft.",
     "The perception of war is still heavily romanticized, with the public dismissing any horrors. Although the Vietnam War was a new instance of the sheer violence of war being televised, many soldiers are still forced to write letters underplaying their situation. APO 96225 is a poem by Larry Rottmann telling the story of a soldier who writes home about the pleasant weather. When asked to describe in greater detail, he describes that \"Today I killed a man. / Yesterday, I helped drop napalm / on women and children\" [5]. His family perceives Vietnam as hospitable, but they cannot swallow even a most general description of horrors of war. Treating war as a vacation stay, they ask how Vietnam treats soldiers; in reality the only bath they partake in is a bloodbath.",
     "Even during the war, the military did not truly believe in the war. In response to conscientious objectors, bombings would be restricted to only militarily relevant areas. Bombings on large cities were routine, so routine that they were predictable enough for civilians to flee before the damage ensued; and this was most likely in order to reduce allegations of mass genocide. The idea of humane bombings is so absurd; even when they are alive, their livelihoods are destroyed by napalm raining havoc on straw roofs.",
     "One letter from American soldiers reads: \"Chris, I finally got to my unit yesterday. Our mission is to find V.C. and kill them. I should be operating like this for the next two months before I get a chance to take a shower and sleep in a bed. What a life. There are absolutely no comforts in our job. I carry nothing but a razor and a bar of soap for comfort. We wear the only clothes we have and wash them in rivers and streams as we cross them. You were right. I managed to get myself right in the middle of it all\" [6]. Soldiers do their job out of fear of what happens if they don't. They are not even given hygienic necessities, not treated as humans. One thing they do not even consider is the conditions of their opponents; the Vietnamese live in these poor conditions, and yet American soldiers are astonished by what is a normal experience for the Vietnamese. In the end, they are both simply tasked with killing the other. Except the Americans have no justification, other than their orders, so their guilt eats away at their consciences.",
@@ -59,12 +59,13 @@ images = [
 for(var i = 0; i < num_dots; i++){
     var element = document.createElement('span');
 
-    var diameter = Math.floor(Math.random() * 3 + 2);
+    var diameter = Math.floor(Math.random() * 2 + 1);
     element.style.width = diameter + 'px';
     element.style.height = diameter + 'px';
 
-    var brightness = 80 + (diameter-2) * 40 + 20 * Math.random();
+    var brightness = 80 + (diameter) * 40 + 20 * Math.random();
     element.style.backgroundColor = 'rgb(' + brightness + ' , ' + brightness + ',' + brightness + ')';
+    element.style.boxShadow = "0px 0px 1px 1.25px " + 'rgb(' + brightness + ' , ' + brightness + ',' + brightness + ')';
 
     var radius = Math.abs(Math.ceil(gaussianRandom(0, 0.8) * window.innerWidth));
     while(radius < diameter * 2){
@@ -92,7 +93,7 @@ for(var i = 0; i < texts.length; i++){
     element.textContent = texts[i];
 
     if(texts[i].length < 25){
-        element.style.fontSize = "30px";
+        element.style.fontSize = "64px";
     }
 
     element.style.radius = window.innerWidth * (orbit[0] * 2.0 / 3);
@@ -298,7 +299,7 @@ function exectuteLoop(){
         var nearestCeiling = Math.ceil(text_position) + 0.5;
         var nearestFloor = Math.ceil(text_position) - 0.5;
 
-        if((Math.abs(text_position-nearestCeiling) < 0.01 || Math.abs(text_position-nearestFloor) < 0.01) && scrollStrength < 25){
+        if((Math.abs(text_position-nearestCeiling) < 0.02 || Math.abs(text_position-nearestFloor) < 0.02) && scrollStrength < 25){
             scrollDirection = 0;
         }
     }

@@ -34,11 +34,13 @@ body{
   transform-origin: 50% 50%;
   transform: rotateZ(-90deg);
 
+  text-shadow: #000000 1px 0 10px;
   font-family: century-gothic, sans-serif;
 
   text-align: right;
 }
 .dot {
+  z-index: -1;
     left: 0;
     top: 0;
 
@@ -52,6 +54,9 @@ body{
 
     background-color: #6f6c6c;
     border-radius: 50%;
+    
+    box-shadow: 0px 0px 1px 1px#686868;
+
     position: fixed;
   }
 
@@ -72,6 +77,8 @@ body{
 
     transform-origin: center;
     opacity: 0;
+
+    text-shadow: #000000 1px 0 10px;
 
     content: "";
   }
