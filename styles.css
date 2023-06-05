@@ -17,12 +17,27 @@ body{
     width: calc(100vw);
     height: calc(100vh);
     margin: 0;
-    padding: 2%;
+    padding: 0;
 
     color:white;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Garamond, serif;
 }
 
+.heading{
+  position: relative;
+
+  left: calc(-10vw);
+  top: calc(50vh);
+
+  height: 10%;
+  width: 40%;
+  transform-origin: 50% 50%;
+  transform: rotateZ(-90deg);
+
+  font-family: century-gothic, sans-serif;
+
+  text-align: right;
+}
 .dot {
     left: 0;
     top: 0;
@@ -76,6 +91,8 @@ body{
     transform: perspective(400px) translate(-50%, -50%);
     transform-origin: center;
     transform-style: preserve-3d;
+
+    backface-visibility:visible;
 
     --queue_id: -1;
     opacity: 0;
