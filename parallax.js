@@ -141,13 +141,15 @@ document.body.addEventListener('resize', ResizeHandler, false);
 
 function updateSlider(){
     slider.setAttribute("min", 0);
-    slider.setAttribute("max", texts.length);
+    slider.setAttribute("max", texts.length * 1000);
 
-    slider.value = text_position;
+    slider.value = text_position * 1000;
 
     slider.oninput = function(){
-        if(this.value > 0.5 && this.value < texts.length - 0.5){
-            text_position = Math.floor(this.value) + 0.5;
+        if(this.value/1000 > 0.5 && this.value/1000 < texts.length - 0.5){
+            text_position = Math.floor(this.value/1000) + 0.5;
+            scrollDirection = 0;
+            scrollStrength = 0;
         }
     }
 }
@@ -256,12 +258,13 @@ function MouseWheelHandler(event){
         scrollDirection = Math.sign(event.wheelDelta);
         scrollStrength = Math.abs(event.wheelDelta);
         //console.log(event.wheelDelta);
-        //rotateText(event.wheelDelta);
+        rotateText(10 * Math.log(Math.abs(event.wheelDelta)) * Math.sign(event.wheelDelta));
         rotateAllDots(event.wheelDelta);
     }else{
         scrollDirection = Math.sign(-event.deltaY);
         scrollStrength = Math.abs(-event.deltaY);
         //console.log(-event.deltaY);
+        rotateText(10 * Math.log(Math.abs(-event.deltaY)) * Math.sign(-event.deltaY));
         //rotateText(-event.deltaY);
         rotateAllDots(-event.deltaY);
     }
@@ -316,12 +319,12 @@ function exectuteLoop(){
         var nearestCeiling = Math.ceil(text_position) + 0.5;
         var nearestFloor = Math.ceil(text_position) - 0.5;
 
-        if((Math.abs(text_position-nearestCeiling) < 0.02 || Math.abs(text_position-nearestFloor) < 0.02) && scrollStrength < 25){
+        if((Math.abs(text_position-nearestCeiling) < 0.02 || Math.abs(text_position-nearestFloor) < 0.02) && scrollStrength < 100){
             scrollDirection = 0;
         }
     }
     updateSlider();
     rotateImages();
-    rotateText(scrollDirection * (travelVelocity));
+    //rotateText(scrollDirection * (travelVelocity));
     rotateAllDots(dotPassiveRotation);
 }
