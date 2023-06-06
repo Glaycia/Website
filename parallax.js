@@ -150,6 +150,13 @@ function updateSlider(){
             text_position = Math.floor(this.value/1000) + 0.5;
             scrollDirection = 0;
             scrollStrength = 0;
+            rotateText(0);
+        }else if(this.value/1000 < 0.5){
+            text_position = 0.5;
+            rotateText(0);
+        }else if(this.value/1000 > texts.length - 0.5){
+            text_position = texts.length - 0.5;
+            rotateText(0);
         }
     }
 }
