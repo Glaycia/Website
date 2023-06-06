@@ -271,7 +271,7 @@ function MouseWheelHandler(event){
         scrollDirection = Math.sign(-event.deltaY);
         scrollStrength = Math.abs(-event.deltaY);
         //console.log(-event.deltaY);
-        rotateText(10 * Math.log(Math.abs(-event.deltaY)) * Math.sign(-event.deltaY));
+        rotateText(100 * Math.log(Math.abs(-event.deltaY)) * Math.sign(-event.deltaY));
         //rotateText(-event.deltaY);
         rotateAllDots(-event.deltaY);
     }
